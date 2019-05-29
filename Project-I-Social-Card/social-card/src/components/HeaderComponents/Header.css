@@ -1,1 +1,17 @@
 /* All styles for your header Components live here */
+
+.title {
+  font-weight: bold;
+}
+
+.title--detail {
+  color: #768896;
+  font-size: 14px;
+  margin: 0 10px;
+}
+
+.title--container {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
