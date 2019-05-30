@@ -1,2 +1,11 @@
-import React from 'react';
-import './Card.css';
+import React from "react";
+import CardBanner from "./CardBanner";
+import "./Card.css";
+
+export default function CardContent() {
+  return (
+    <div>
+      <CardBanner />
+    </div>
+  );
+}
