@@ -9,11 +9,24 @@
   margin-right: 5%;
   width: 85%;
   overflow: hidden;
-  margin-top: 10px;
   border-radius: 6px;
   border: 1px solid lightgray;
 }
 
 .card--content {
   padding: 10px;
+}
+
+.card--title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.card--paragraph {
+  margin: 10px 0;
+}
+
+.card--link {
+  color: #84939f;
+  text-decoration: none;
 }
