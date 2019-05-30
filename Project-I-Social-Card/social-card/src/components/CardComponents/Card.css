@@ -5,6 +5,8 @@
 }
 
 .card--container {
+  text-decoration: none;
+  color: initial;
   align-self: flex-end;
   margin-right: 5%;
   width: 85%;

@@ -5,9 +5,9 @@ import "./Card.css";
 
 export default function CardContainer() {
   return (
-    <div className="card--container">
+    <a href="reactjs.org" target="_blank" className="card--container">
       <CardBanner />
       <CardContent />
-    </div>
+    </a>
   );
 }
