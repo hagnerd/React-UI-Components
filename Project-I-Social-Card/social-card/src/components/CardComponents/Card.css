@@ -5,8 +5,15 @@
 }
 
 .card--container {
+  align-self: flex-end;
+  margin-right: 5%;
+  width: 85%;
   overflow: hidden;
   margin-top: 10px;
   border-radius: 6px;
   border: 1px solid lightgray;
+}
+
+.card--content {
+  padding: 10px;
 }
