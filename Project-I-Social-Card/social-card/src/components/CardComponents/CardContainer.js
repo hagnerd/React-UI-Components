@@ -4,7 +4,7 @@ import "./Card.css";
 
 export default function CardContent() {
   return (
-    <div>
+    <div className="card--container">
       <CardBanner />
     </div>
   );
