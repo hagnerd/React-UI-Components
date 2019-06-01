@@ -58,11 +58,12 @@ table {
   grid-template-rows: 100px repeat(4, 100px);
   width: 500px;
   margin: 100px auto;
+  border: 1px solid #979797;
 }
 
 .calculator-grid * {
   display: flex;  
   justify-content: center;
   align-items: center;
-  border: 2px solid #979797;
+  border: 1px solid #979797;
 }
