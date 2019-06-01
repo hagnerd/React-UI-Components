@@ -7,6 +7,6 @@ export default function CalculatorDisplay({ text, className }) {
 }
 
 CalculatorDisplay.propTypes = {
-  text: propString(),
-  className: propString()
+  text: propString.isRequired,
+  className: propString
 };
