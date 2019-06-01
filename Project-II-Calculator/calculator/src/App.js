@@ -12,38 +12,23 @@ const App = () => {
         className="calculator-display calculator-grid-item"
       />
       <ActionButton text="clear" actionStyle="btn col-span-3 weight-light" />
-      <ActionButton
-        text="&divide;"
-        actionStyle="btn text-l bg-carmine text-color-white weight-light"
-      />
-      <NumberButton text="7" buttonStyle="btn" />
-      <NumberButton text="8" buttonStyle="btn" />
-      <NumberButton text="9" buttonStyle="btn" />
-      <ActionButton
-        text="&times;"
-        actionStyle="btn text-l bg-carmine text-color-white weight-light"
-      />
+      <ActionButton text="&divide;" />
+      <NumberButton text="7" />
+      <NumberButton text="8" />
+      <NumberButton text="9" />
+      <ActionButton text="&times;" />
 
-      <NumberButton text="4" buttonStyle="btn" />
-      <NumberButton text="5" buttonStyle="btn" />
-      <NumberButton text="6" buttonStyle="btn" />
-      <ActionButton
-        text="&minus;"
-        actionStyle="btn text-l bg-carmine text-color-white weight-light"
-      />
-      <NumberButton text="1" buttonStyle="btn" />
-      <NumberButton text="2" buttonStyle="btn" />
-      <NumberButton text="3" buttonStyle="btn" />
-      <ActionButton
-        text="+"
-        actionStyle="btn text-l bg-carmine text-color-white weight-light"
-      />
+      <NumberButton text="4" />
+      <NumberButton text="5" />
+      <NumberButton text="6" />
+      <ActionButton text="&minus;" />
+      <NumberButton text="1" />
+      <NumberButton text="2" />
+      <NumberButton text="3" />
+      <ActionButton text="+" />
 
       <NumberButton text="0" buttonStyle="btn col-span-3" />
-      <ActionButton
-        text="="
-        actionStyle="btn text-l bg-carmine text-color-white weight-light"
-      />
+      <ActionButton text="=" />
     </div>
   );
 };

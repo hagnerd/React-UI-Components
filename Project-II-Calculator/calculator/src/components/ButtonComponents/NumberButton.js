@@ -2,7 +2,7 @@ import React from "react";
 import { string as propString } from "prop-types";
 import "./Button.css";
 
-export default function NumberButton({ text, buttonStyle = "" }) {
+export default function NumberButton({ text, buttonStyle = "btn" }) {
   return <button className={buttonStyle}>{text}</button>;
 }
 
