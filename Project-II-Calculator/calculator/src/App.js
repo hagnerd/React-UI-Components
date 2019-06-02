@@ -111,6 +111,7 @@ class App extends React.Component {
           text="&divide;"
           handleClick={this.handleClick}
           keyAlt="/"
+          name="divide"
         />
         <NumberButton text="7" handleClick={this.handleClick} />
         <NumberButton text="8" handleClick={this.handleClick} />
@@ -119,6 +120,7 @@ class App extends React.Component {
           text="&times;"
           handleClick={this.handleClick}
           keyAlt="x"
+          name="multiply"
         />
 
         <NumberButton text="4" handleClick={this.handleClick} />
@@ -128,11 +130,12 @@ class App extends React.Component {
           text="&minus;"
           handleClick={this.handleClick}
           keyAlt="-"
+          name="subtract"
         />
         <NumberButton text="1" handleClick={this.handleClick} />
         <NumberButton text="2" handleClick={this.handleClick} />
         <NumberButton text="3" handleClick={this.handleClick} />
-        <ActionButton text="+" handleClick={this.handleClick} />
+        <ActionButton text="+" name="add" handleClick={this.handleClick} />
 
         <NumberButton
           text="0"
