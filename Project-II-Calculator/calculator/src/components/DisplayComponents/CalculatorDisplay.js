@@ -3,7 +3,11 @@ import { string as propString } from "prop-types";
 import "./Display.css";
 
 export default function CalculatorDisplay({ text, className }) {
-  return <h2 className={className}>{text}</h2>;
+  return (
+    <h2 data-testid="calculator-display" className={className}>
+      {text}
+    </h2>
+  );
 }
 
 CalculatorDisplay.propTypes = {
