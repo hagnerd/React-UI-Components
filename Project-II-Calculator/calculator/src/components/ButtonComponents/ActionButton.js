@@ -7,10 +7,12 @@ export default function ActionButton({
   actionStyle = "btn text-l bg-carmine text-color-white weight-light",
   handleClick,
   type = "operator",
-  keyAlt = text
+  keyAlt = text,
+  name = text
 }) {
   return (
     <button
+      data-testid={name}
       className={actionStyle}
       onClick={() => handleClick({ type, key: keyAlt })}
     >
@@ -23,6 +25,7 @@ ActionButton.propTypes = {
   text: propString.isRequired,
   handleClick: func.isRequired,
   type: propString,
-  keyAlt: propString,
+  key: propString,
+  name: propString,
   actionStyle: propString
 };
