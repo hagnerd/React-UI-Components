@@ -1,0 +1,10 @@
+h2.calculator-display {
+  background-color: black;
+  color: white;
+  grid-column: span 4;
+  justify-content: flex-end;
+  height: 100%;
+  padding-right: 5%;
+  font-size: 4rem;
+  font-weight: normal;
+}

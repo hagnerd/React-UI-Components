@@ -1,0 +1,26 @@
+.btn {
+  font-size: 2.5rem;
+  background-color: white;
+  padding: 0;
+  cursor: pointer;
+}
+
+.weight-light {
+  font-weight: 200;
+}
+
+.col-span-3 {
+  grid-column: span 3;
+}
+
+.bg-carmine {
+  background-color: #a0051e;
+}
+
+.text-color-white {
+  color: white;
+}
+
+.text-l {
+  font-size: 5rem;
+}
