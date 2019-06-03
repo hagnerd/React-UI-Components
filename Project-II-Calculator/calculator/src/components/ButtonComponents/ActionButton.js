@@ -6,7 +6,7 @@ export default function ActionButton({
   text,
   actionStyle = "btn text-l bg-carmine text-color-white weight-light",
   handleClick,
-  type = "operator",
+  type = "PUSH_OPERATOR",
   keyAlt = text,
   name = text
 }) {
@@ -14,7 +14,7 @@ export default function ActionButton({
     <button
       data-testid={name}
       className={actionStyle}
-      onClick={() => handleClick({ type, key: keyAlt })}
+      onClick={() => handleClick({ type, payload: keyAlt })}
     >
       {text}
     </button>

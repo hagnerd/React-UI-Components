@@ -9,143 +9,167 @@ const initialState = {
   calculation: []
 };
 
-class App extends React.Component {
-  state = initialState;
-
-  handleClick = ({ type, key }) => {
-    if (type === "clear") {
-      this.setState(initialState);
-    }
-
-    // Write over the initial 0
-    if (
-      this.state.calculation.length === 0 &&
-      type === "number" &&
-      key !== "0"
-    ) {
-      this.setState({
-        display: key,
-        calculation: [key]
-      });
-    }
-
-    if (this.state.calculation.length === 1) {
-      if (type === "operator") {
-        this.setState(prevState => ({
-          display: key,
-          calculation: [...prevState.calculation, key]
-        }));
-      } else if (type === "number") {
-        this.setState(prevState => ({
-          display: `${prevState.display}${key}`,
-          calculation: [`${prevState.calculation[0]}${key}`]
-        }));
-      }
-    }
-
-    if (this.state.calculation.length === 2 && type === "number") {
-      this.setState(prevState => ({
-        display: key,
-        calculation: [...prevState.calculation, key]
-      }));
-    }
-
-    if (this.state.calculation.length === 3) {
-      if (type === "number") {
-        this.setState(prevState => ({
-          display: `${prevState.display}${key}`,
-          calculation: [
-            ...prevState.calculation.slice(0, 2),
-            `${prevState.calculation[2]}${key}`
-          ]
-        }));
-      } else if (type === "equals") {
-        const [n1, operator, n2] = this.state.calculation;
-
-        switch (operator) {
-          case "+":
-            this.setState({
-              display: `${Number(n1) + Number(n2)}`,
-              calculation: []
-            });
-            break;
-          case "-":
-            this.setState({
-              display: `${Number(n1) - Number(n2)}`,
-              calculation: []
-            });
-            break;
-          case "x":
-            this.setState({
-              display: `${Number(n1) * Number(n2)}`,
-              calculation: []
-            });
-            break;
-          case "/":
-            this.setState({
-              display: `${Number(n1) / Number(n2)}`,
-              calculation: []
-            });
-            break;
-          default:
-            return;
-        }
-      }
-    }
-  };
-
-  render() {
-    return (
-      <div className="calculator-grid">
-        <CalculatorDisplay
-          text={this.state.display}
-          className="calculator-display calculator-grid-item"
-        />
-        <ActionButton
-          text="clear"
-          actionStyle="btn col-span-3 weight-light"
-          handleClick={this.handleClick}
-          type="clear"
-        />
-        <ActionButton
-          text="&divide;"
-          handleClick={this.handleClick}
-          keyAlt="/"
-          name="divide"
-        />
-        <NumberButton text="7" handleClick={this.handleClick} />
-        <NumberButton text="8" handleClick={this.handleClick} />
-        <NumberButton text="9" handleClick={this.handleClick} />
-        <ActionButton
-          text="&times;"
-          handleClick={this.handleClick}
-          keyAlt="x"
-          name="multiply"
-        />
-
-        <NumberButton text="4" handleClick={this.handleClick} />
-        <NumberButton text="5" handleClick={this.handleClick} />
-        <NumberButton text="6" handleClick={this.handleClick} />
-        <ActionButton
-          text="&minus;"
-          handleClick={this.handleClick}
-          keyAlt="-"
-          name="subtract"
-        />
-        <NumberButton text="1" handleClick={this.handleClick} />
-        <NumberButton text="2" handleClick={this.handleClick} />
-        <NumberButton text="3" handleClick={this.handleClick} />
-        <ActionButton text="+" name="add" handleClick={this.handleClick} />
-
-        <NumberButton
-          text="0"
-          handleClick={this.handleClick}
-          buttonStyle="btn col-span-3"
-        />
-        <ActionButton text="=" handleClick={this.handleClick} type="equals" />
-      </div>
-    );
+function handlePushNumber(state, newNumber) {
+  /*
+   * When pushing a number we have four states to worry about:
+   */
+  switch (state.calculation.length) {
+    case 0:
+      /* 1. This is a new calculation, so add the new number to the display,
+      as long as it isn't the number 0. */
+      return newNumber !== 0
+        ? { display: newNumber, calculation: [newNumber] }
+        : state;
+    case 1:
+      /* 2. There is already a number present in the display, so we are
+       * continuing to add digits (i.e. the number 12 is the number 1,
+       * followed by the number 2). */
+      return {
+        display: `${state.display}${newNumber}`,
+        calculation: [`${state.calculation[0]}${newNumber}`]
+      };
+    case 2:
+      /* 3. There is a number and an operator, so we are starting a new
+       * number. */
+      return {
+        display: newNumber,
+        calculation: [...state.calculation, newNumber]
+      };
+    case 3:
+      /* 4. There is already a second number but we are adding digits to it. */
+      return {
+        display: `${state.display}${newNumber}`,
+        calculation: [
+          ...state.calculation.slice(0, 2),
+          `${state.calculation[2]}${newNumber}`
+        ]
+      };
+    default:
+      return state;
   }
+}
+
+function handlePushOperator(state, operator) {
+  /*
+   * There is only 1 valid state to be adding an operator:
+   * There is already a number present.
+   * */
+  return state.calculation.length === 1
+    ? {
+        display: operator,
+        calculation: [...state.calculation, operator]
+      }
+    : state;
+}
+
+function handleCalculate(state) {
+  /*
+   * If someone attempts to calculate before there is two numbers,
+   * and an operator, it should not work.
+   */
+  if (state.calculation.length !== 3) {
+    return state;
+  }
+
+  // Get the two numbers and the operator from state
+  const [n1, operator, n2] = state.calculation;
+
+  /*
+   * Set the new display based on the result of the calculation
+   * */
+  let display;
+  switch (operator) {
+    case "x":
+      display = `${Number(n1) * Number(n2)}`;
+      break;
+    case "/":
+      display = `${Number(n1) / Number(n2)}`;
+      break;
+    case "+":
+      display = `${Number(n1) + Number(n2)}`;
+      break;
+    case "-":
+      display = `${Number(n1) - Number(n2)}`;
+      break;
+    default:
+      display = state.display;
+  }
+
+  // Reset the calculation to [], and return the new state;
+  return {
+    display,
+    calculation: []
+  };
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "PUSH_NUMBER":
+      return handlePushNumber(state, action.payload);
+    case "PUSH_OPERATOR":
+      return handlePushOperator(state, action.payload);
+    case "CALCULATE":
+      return handleCalculate(state);
+    case "CLEAR_DISPLAY":
+      return initialState;
+    default:
+      return state;
+  }
+}
+
+function App() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  return (
+    <div className="calculator-grid">
+      <CalculatorDisplay
+        text={state.display}
+        className="calculator-display calculator-grid-item"
+      />
+      <ActionButton
+        text="clear"
+        actionStyle="btn col-span-3 weight-light"
+        handleClick={dispatch}
+        type="CLEAR_DISPLAY"
+      />
+      <ActionButton
+        text="&divide;"
+        handleClick={dispatch}
+        keyAlt="/"
+        name="divide"
+      />
+      <NumberButton text="7" handleClick={dispatch} />
+      <NumberButton text="8" handleClick={dispatch} />
+      <NumberButton text="9" handleClick={dispatch} />
+      <ActionButton
+        text="&times;"
+        handleClick={dispatch}
+        keyAlt="x"
+        name="multiply"
+      />
+
+      <NumberButton text="4" handleClick={dispatch} />
+      <NumberButton text="5" handleClick={dispatch} />
+      <NumberButton text="6" handleClick={dispatch} />
+      <ActionButton
+        text="&minus;"
+        handleClick={dispatch}
+        keyAlt="-"
+        name="subtract"
+      />
+      <NumberButton text="1" handleClick={dispatch} />
+      <NumberButton text="2" handleClick={dispatch} />
+      <NumberButton text="3" handleClick={dispatch} />
+      <ActionButton text="+" name="add" handleClick={dispatch} />
+
+      <NumberButton
+        text="0"
+        handleClick={dispatch}
+        buttonStyle="btn col-span-3"
+      />
+      <ActionButton text="=" handleClick={dispatch} type="CALCULATE" />
+    </div>
+  );
 }
 
 export default App;

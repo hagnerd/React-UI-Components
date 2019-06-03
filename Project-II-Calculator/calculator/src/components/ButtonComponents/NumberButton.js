@@ -10,7 +10,7 @@ export default function NumberButton({
   return (
     <button
       className={buttonStyle}
-      onClick={() => handleClick({ type: "number", key: text })}
+      onClick={() => handleClick({ type: "PUSH_NUMBER", payload: text })}
     >
       {text}
     </button>
